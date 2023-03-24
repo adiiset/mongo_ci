@@ -5,11 +5,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * Author: https://roytuts.com
  */
 
-class UserModel extends CI_model
+class M_customers extends CI_model
 {
 
-	private $database = 'eapps_users';
-	private $collection = 'identitas';
+	private $database = 'penjualan';
+	private $collection = 'customers';
 	private $conn;
 
 	function __construct()
@@ -19,7 +19,7 @@ class UserModel extends CI_model
 		$this->conn = $this->mongodb->getConn();
 	}
 
-	function get_user_list()
+	function semua_customers()
 	{
 		try {
 			$filter = [];
@@ -29,9 +29,10 @@ class UserModel extends CI_model
 
 			return $result;
 		} catch (MongoDB\Driver\Exception\RuntimeException $ex) {
-			show_error('Error while fetching users: ' . $ex->getMessage(), 500);
+			show_error('Gagal mendapatkan data customers: ' . $ex->getMessage(), 500);
 		}
 	}
+
 
 	function get_user($_id)
 	{

@@ -5,19 +5,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * Author: https://roytuts.com
  */
 
-class UserController extends CI_Controller
+class Penjualan extends CI_Controller
 {
-
     function __construct()
     {
         parent::__construct();
-        $this->load->model('usermodel');
+        $this->load->model('m_customers');
     }
 
     function index()
     {
-        $data['users'] = $this->usermodel->get_user_list();
-        $this->load->view('users', $data);
+        $data['customers'] = $this->m_customers->semua_customers();
+        $this->load->view('content', $data);
     }
 
     public function create()
@@ -27,7 +26,7 @@ class UserController extends CI_Controller
             $this->form_validation->set_rules('email', 'Email Address', 'trim|required');
 
             if ($this->form_validation->run() !== FALSE) {
-                $result = $this->usermodel->create_user($this->input->post('name'), $this->input->post('email'));
+                $result = $this->daerahmodel->create_user($this->input->post('name'), $this->input->post('email'));
                 if ($result === TRUE) {
                     redirect('/');
                 } else {
@@ -50,7 +49,7 @@ class UserController extends CI_Controller
             $this->form_validation->set_rules('email', 'Email Address', 'trim|valid_email|required');
 
             if ($this->form_validation->run() !== FALSE) {
-                $result = $this->usermodel->update_user($_id, $this->input->post('name'), $this->input->post('email'));
+                $result = $this->daerahmodel->update_user($_id, $this->input->post('name'), $this->input->post('email'));
                 if ($result === TRUE) {
                     redirect('/');
                 } else {
@@ -62,7 +61,7 @@ class UserController extends CI_Controller
                 $this->load->view('user_update', $data);
             }
         } else {
-            $data['user'] = $this->usermodel->get_user($_id);
+            $data['user'] = $this->daerahmodel->get_user($_id);
             $this->load->view('user_update', $data);
         }
     }
@@ -70,7 +69,7 @@ class UserController extends CI_Controller
     function delete($_id)
     {
         if ($_id) {
-            $this->usermodel->delete_user($_id);
+            $this->daerahmodel->delete_user($_id);
         }
         redirect('/');
     }
