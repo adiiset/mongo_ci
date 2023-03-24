@@ -52,12 +52,12 @@ class M_customers extends CI_model
 		}
 	}
 
-	function create_user($name, $alamat)
+	function create_user($name, $ttl)
 	{
 		try {
 			$user = array(
-				'nama' => $name,
-				'alamat' => $alamat
+				'Employee_Name' => $name,
+				'DOB' => $ttl
 			);
 
 			$query = new MongoDB\Driver\BulkWrite();
@@ -79,7 +79,7 @@ class M_customers extends CI_model
 	{
 		try {
 			$query = new MongoDB\Driver\BulkWrite();
-			$query->update(['_id' => new MongoDB\BSON\ObjectId($_id)], ['$set' => array('name' => $name, 'email' => $email)]);
+			$query->update(['_id' => new MongoDB\BSON\ObjectId($_id)], ['$set' => array('Employee_Name' => $name, 'DOB' => $email)]);
 
 			$result = $this->conn->executeBulkWrite($this->database . '.' . $this->collection, $query);
 

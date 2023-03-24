@@ -23,10 +23,10 @@ class Penjualan extends CI_Controller
     {
         if ($this->input->post('submit')) {
             $this->form_validation->set_rules('name', 'Full Name', 'trim|required');
-            $this->form_validation->set_rules('email', 'Email Address', 'trim|required');
+            $this->form_validation->set_rules('ttl', 'Email Address', 'trim|required');
 
             if ($this->form_validation->run() !== FALSE) {
-                $result = $this->daerahmodel->create_user($this->input->post('name'), $this->input->post('email'));
+                $result = $this->m_customers->create_user($this->input->post('name'), $this->input->post('email'));
                 if ($result === TRUE) {
                     redirect('/');
                 } else {
@@ -45,11 +45,8 @@ class Penjualan extends CI_Controller
     function update($_id)
     {
         if ($this->input->post('submit')) {
-            $this->form_validation->set_rules('name', 'Full Name', 'trim|required');
-            $this->form_validation->set_rules('email', 'Email Address', 'trim|valid_email|required');
-
-            if ($this->form_validation->run() !== FALSE) {
-                $result = $this->daerahmodel->update_user($_id, $this->input->post('name'), $this->input->post('email'));
+            if ($this->input->post('employee_name')) {
+                $result = $this->m_customers->update_user($_id, $this->input->post('employee_name'), $this->input->post('tempat_tanggal_lahir'));
                 if ($result === TRUE) {
                     redirect('/');
                 } else {
@@ -61,7 +58,7 @@ class Penjualan extends CI_Controller
                 $this->load->view('user_update', $data);
             }
         } else {
-            $data['user'] = $this->daerahmodel->get_user($_id);
+            $data['user'] = $this->m_customers->get_user($_id);
             $this->load->view('user_update', $data);
         }
     }
@@ -69,7 +66,7 @@ class Penjualan extends CI_Controller
     function delete($_id)
     {
         if ($_id) {
-            $this->daerahmodel->delete_user($_id);
+            $this->m_customers->delete_user($_id);
         }
         redirect('/');
     }

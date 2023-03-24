@@ -34,8 +34,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <h5>Nama</h5>
             <input type="text" name="name" value="<?php echo set_value('name'); ?>" size="50" />
 
-            <h5>Alamat</h5>
-            <input type="text" name="email" value="<?php echo set_value('email'); ?>" size="50" />
+            <h5>Tempat tanggal lahir</h5>
+            <input type="text" name="ttl" value="<?php echo set_value('email'); ?>" size="50" />
 
             <p><input type="submit" name="submit" value="Submit" /></p>
 

@@ -14,7 +14,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <h1>Codeigniter MongoDB Create Read Update Delete Example</h1>
 
         <div>
-            <?php echo anchor('/usercontroller', 'Back to Users'); ?>
+            <?php echo anchor('/penjualan', 'Back to Users'); ?>
         </div>
 
         <div id="body">
@@ -30,12 +30,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
             $attributes = array('name' => 'form', 'id' => 'form');
             echo form_open($this->uri->uri_string(), $attributes);
             ?>
+            <h5>Nama Customer</h5>
+            <input type="text" name="employee_name" value="<?php echo isset($user) ? $user->Employee_Name : set_value('employee_name'); ?>" size="50" />
 
-            <h5>Full Name</h5>
-            <input type="text" name="name" value="<?php echo isset($user) ? $user->nama : set_value('name'); ?>" size="50" />
-
-            <h5>Email Address</h5>
-            <input type="text" name="email" value="<?php echo isset($user) ? $user->alamat : set_value('email'); ?>" size="50" />
+            <h5>Tempat tanggal lahir</h5>
+            <input type="text" name="tempat_tanggal_lahir" value="<?php echo isset($user) ? $user->DOB : set_value('tempat_tanggal_lahir'); ?>" size="50" />
 
             <p><input type="submit" name="submit" value="Submit" /></p>
 
